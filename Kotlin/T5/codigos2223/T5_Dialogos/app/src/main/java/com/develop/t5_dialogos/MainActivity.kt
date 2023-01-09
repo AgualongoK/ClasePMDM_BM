@@ -12,10 +12,12 @@ import com.develop.t5_dialogos.dialogs.DialogoLista
 import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity(), OnClickListener,
-    DialogoConfirmacion.OnDialogoConfirmListener {
+    DialogoConfirmacion.OnDialogoConfirmListener,
+    DialogoLista.OnDialogoConfirmListenerList{
 
     private lateinit var binding: ActivityMainBinding
-    private var dialogoConfirm: DialogoConfirmacion;
+    var dialogoConfirm: DialogoConfirmacion;
+    lateinit var dialogoLista: DialogoLista;
 
     init {
         dialogoConfirm = DialogoConfirmacion()
@@ -60,6 +62,12 @@ class MainActivity : AppCompatActivity(), OnClickListener,
             Snackbar.make(binding.root, "Seleccionado true", Snackbar.LENGTH_SHORT).show()
         } else {
             Snackbar.make(binding.root, "Seleccionado false", Snackbar.LENGTH_SHORT).show()
+        }
+    }
+
+    override fun onDialogoSelectedList(seleccionado: Boolean) {
+        if(seleccionado){
+
         }
     }
 }
