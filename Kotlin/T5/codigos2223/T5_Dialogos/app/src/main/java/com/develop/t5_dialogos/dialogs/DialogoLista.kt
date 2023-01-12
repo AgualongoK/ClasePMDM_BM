@@ -10,10 +10,11 @@ import androidx.fragment.app.DialogFragment
 
 class DialogoLista : DialogFragment() {
 
-    private lateinit var listener: OnListListener
+    private lateinit var listener: OnListaListener
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        listener = context as OnListaListener
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -25,6 +26,7 @@ class DialogoLista : DialogFragment() {
         //builder.setMessage("Mensaj        e de la lista")
         builder.setItems(elementos, DialogInterface.OnClickListener { dialogInterface, i ->
             // i --> posicion pulsada
+            listener.onElementoListaSelected(elementos[i])
         })
         // no hay que poner botones --> como mucho pongo el neutral
 
@@ -32,7 +34,8 @@ class DialogoLista : DialogFragment() {
         return builder.create();
     }
 
-    interface OnListListener {
-        fun onElementoListaSelected(seleccionado: Boolean)
+    interface OnListaListener{
+        fun onElementoListaSelected(elemento: String)
     }
+
 }

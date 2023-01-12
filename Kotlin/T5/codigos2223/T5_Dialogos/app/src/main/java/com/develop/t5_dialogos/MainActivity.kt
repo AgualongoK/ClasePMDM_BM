@@ -9,15 +9,16 @@ import android.widget.Toast
 import com.develop.t5_dialogos.databinding.ActivityMainBinding
 import com.develop.t5_dialogos.dialogs.DialogoConfirmacion
 import com.develop.t5_dialogos.dialogs.DialogoLista
+import com.develop.t5_dialogos.dialogs.DialogoListaSimple
+import com.develop.t5_dialogos.dialogs.DialogoMultiple
 import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity(), OnClickListener,
-    DialogoConfirmacion.OnDialogoConfirmListener,
-    DialogoLista.OnDialogoConfirmListenerList{
+    DialogoConfirmacion.OnDialogoConfirmListener, DialogoLista.OnListaListener,
+    DialogoListaSimple.OnListaSimpleListener {
 
     private lateinit var binding: ActivityMainBinding
-    var dialogoConfirm: DialogoConfirmacion;
-    lateinit var dialogoLista: DialogoLista;
+    private var dialogoConfirm: DialogoConfirmacion;
 
     init {
         dialogoConfirm = DialogoConfirmacion()
@@ -41,6 +42,9 @@ class MainActivity : AppCompatActivity(), OnClickListener,
     private fun acciones() {
         binding.botonConfirmacion.setOnClickListener(this)
         binding.botonLista.setOnClickListener(this)
+        binding.botonListaSimple.setOnClickListener(this)
+        binding.botonListaMultiple.setOnClickListener(this)
+
     }
 
     override fun onClick(p0: View?) {
@@ -54,6 +58,12 @@ class MainActivity : AppCompatActivity(), OnClickListener,
             binding.botonLista.id ->{
                 DialogoLista().show(supportFragmentManager,"")
             }
+            binding.botonListaSimple.id ->{
+                DialogoListaSimple().show(supportFragmentManager,"")
+            }
+            binding.botonListaMultiple.id ->{
+                DialogoMultiple().show(supportFragmentManager,"")
+            }
         }
     }
 
@@ -65,9 +75,11 @@ class MainActivity : AppCompatActivity(), OnClickListener,
         }
     }
 
-    override fun onDialogoSelectedList(seleccionado: Boolean) {
-        if(seleccionado){
+    override fun onElementoListaSelected(elemento: String) {
+        binding.listaConfirmacion.text = elemento
+    }
 
-        }
+    override fun onListaSelected(elemento: String?) {
+        binding.listaSimpleConfirmacion.text = elemento?:"Sin comunicacion"
     }
 }
