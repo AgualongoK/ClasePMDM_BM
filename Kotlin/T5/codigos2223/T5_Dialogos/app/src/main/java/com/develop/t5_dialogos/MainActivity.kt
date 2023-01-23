@@ -49,6 +49,8 @@ class MainActivity : AppCompatActivity(), OnClickListener,
 
     override fun onClick(p0: View?) {
         when (p0!!.id) {
+
+
             binding.botonConfirmacion.id -> {
                 // saltar en cuadro de diálogo
                 // show() parte del DialogFragment
